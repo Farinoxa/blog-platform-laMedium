@@ -1,0 +1,32 @@
+.themeCover {
+  max-height: 250px;
+}
+.themeCoverPaper {
+  height: 250px;
+}
+
+.mainContent {
+  background-color: yellowgreen;
+  height: 600px;
+}
+
+.themeCoverPaper {
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.themeCoverOverlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.MuiTypography-h4 {
+  color: white;
+  padding-top: 150px;
+}
