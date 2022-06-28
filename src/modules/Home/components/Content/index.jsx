@@ -6,9 +6,9 @@ import {
   Paper,
   Divider,
 } from '@material-ui/core/';
-import Article from '../Articles/Articles';
-import article from '../../constants/article';
-import Chips from '../../../shared/Chips/Chips';
+import Article from '../Articles';
+import article from '../../constants';
+import Chips from '../../../shared/Chips';
 
 import './Content.css';
 
@@ -24,12 +24,10 @@ function Content() {
         >
           <Container fixed>
             <div className="themeCoverOverlay" />
-            <Grid Container>
-              <Grid item>
-                <Typography variant="h4">
-                  What Matters to You Matters to Us
-                </Typography>
-              </Grid>
+            <Grid item>
+              <Typography variant="h4">
+                What Matters to You Matters to Us
+              </Typography>
             </Grid>
           </Container>
         </Paper>
@@ -47,7 +45,7 @@ function Content() {
               />
             </Grid>
             <Divider orientation="vertical" flexItem />
-            <Grid item md={2}>
+            <Grid item md={3}>
               <Chips />
             </Grid>
           </Grid>

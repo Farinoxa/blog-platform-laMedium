@@ -1,6 +1,6 @@
 import React from 'react';
-import Home from './modules/Home/Home';
-import AppLayout from './modules/shared/layouts/AppLayout';
+import Home from './modules/Home';
+import AppLayout from './modules/shared/layouts';
 import './App.css';
 
 function App() {

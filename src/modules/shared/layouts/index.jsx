@@ -1,8 +1,8 @@
 import React from 'react';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import PropTypes from 'prop-types';
+import Footer from '../Footer';
+import Header from '../Header';
 
-// eslint-disable-next-line react/prop-types
 function AppLayout({ children }) {
   return (
     <div>
@@ -12,5 +12,9 @@ function AppLayout({ children }) {
     </div>
   );
 }
+
+AppLayout.propTypes = {
+  children: PropTypes.string.isRequired,
+};
 
 export default AppLayout;
