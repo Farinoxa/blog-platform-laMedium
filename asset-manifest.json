@@ -1,18 +1,21 @@
 {
   "files": {
-    "main.css": "/blog-platform-la_medium/static/css/main.9faff2b2.css",
-    "main.js": "/blog-platform-la_medium/static/js/main.75b9f5d9.js",
+    "main.css": "/blog-platform-la_medium/static/css/main.c5dc5947.css",
+    "main.js": "/blog-platform-la_medium/static/js/main.3f57b382.js",
     "static/js/787.e4d3295b.chunk.js": "/blog-platform-la_medium/static/js/787.e4d3295b.chunk.js",
     "static/media/angularNewsPic1.png": "/blog-platform-la_medium/static/media/angularNewsPic1.4b8b6eb670490a0ca45a.png",
     "static/media/reactRacePic.jfif": "/blog-platform-la_medium/static/media/reactRacePic.15c83ba0e490468299ca.jfif",
-    "static/media/logo.svg": "/blog-platform-la_medium/static/media/logo.7cefe8161b484b2d9ec67dd61bd8fa94.svg",
+    "static/media/competitive.jpeg": "/blog-platform-la_medium/static/media/competitive.2c7d0643f7cf7d14f244.jpeg",
+    "static/media/badHabits.jpeg": "/blog-platform-la_medium/static/media/badHabits.976280809d8f937b83b2.jpeg",
+    "static/media/math.jpg": "/blog-platform-la_medium/static/media/math.ddb523a5f488ae33ded2.jpg",
+    "static/media/logo.svg": "/blog-platform-la_medium/static/media/logo.cb5345207cbef3513ae0c1a7b199dbb3.svg",
     "index.html": "/blog-platform-la_medium/index.html",
-    "main.9faff2b2.css.map": "/blog-platform-la_medium/static/css/main.9faff2b2.css.map",
-    "main.75b9f5d9.js.map": "/blog-platform-la_medium/static/js/main.75b9f5d9.js.map",
+    "main.c5dc5947.css.map": "/blog-platform-la_medium/static/css/main.c5dc5947.css.map",
+    "main.3f57b382.js.map": "/blog-platform-la_medium/static/js/main.3f57b382.js.map",
     "787.e4d3295b.chunk.js.map": "/blog-platform-la_medium/static/js/787.e4d3295b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9faff2b2.css",
-    "static/js/main.75b9f5d9.js"
+    "static/css/main.c5dc5947.css",
+    "static/js/main.3f57b382.js"
   ]
 }
