@@ -14,7 +14,7 @@ function AppLayout({ children }) {
 }
 
 AppLayout.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default AppLayout;

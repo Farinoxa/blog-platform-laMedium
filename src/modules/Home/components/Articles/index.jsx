@@ -38,19 +38,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Article({
-  title,
-  description,
-  userName,
-  userAvatar,
-  newsPicture,
-}) {
+export default function Article({ article }) {
   const classes = useStyles();
+
+  const { userAvatar, userName, title, description, newsPicture } = article;
 
   return (
     <Card className={classes.root}>
       <CardHeader
-        avatar={<Avatar alt={userName} src={userAvatar.angularNewsPic1} />}
+        avatar={<Avatar alt={userName} src={userAvatar} />}
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
@@ -61,7 +57,7 @@ export default function Article({
       />
       <CardMedia
         className={classes.media}
-        image={newsPicture.reactRacePic}
+        image={newsPicture}
         title="Paella dish"
       />
       <CardContent>
@@ -85,9 +81,11 @@ export default function Article({
 }
 
 Article.propTypes = {
-  userName: PropTypes.string.isRequired,
-  userAvatar: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  newsPicture: PropTypes.string.isRequired,
+  article: PropTypes.shape({
+    userName: PropTypes.string.isRequired,
+    userAvatar: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    newsPicture: PropTypes.string.isRequired,
+  }).isRequired,
 };

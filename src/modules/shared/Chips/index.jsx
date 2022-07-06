@@ -1,5 +1,6 @@
 import React from 'react';
 import { Chip, Grid } from '@material-ui/core';
+import './Chips.css';
 
 function Chips() {
   const chipLabels = [
@@ -11,14 +12,11 @@ function Chips() {
     'Nodejs',
   ];
 
-  const chip = chipLabels.map((label) => (
-    <Chip key={label} clickable label={label} />
-  ));
-
   return (
-    <Grid conteiner>
-      <h2>Related Topics</h2>
-      {chip}
+    <Grid item md={6} className="chipsContainer">
+      {chipLabels.map((label) => (
+        <Chip id="chip" key={label} clickable label={label} />
+      ))}
     </Grid>
   );
 }

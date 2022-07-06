@@ -1,20 +1,18 @@
 .themeCover {
   max-height: 250px;
 }
-.themeCoverPaper {
-  height: 250px;
-}
 
 .mainContent {
-  background-color: yellowgreen;
-  height: 600px;
+  background-color: rgba(245, 243, 243, 0.897);
 }
 
 .themeCoverPaper {
+  height: 250px;
   position: relative;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  z-index: 1;
 }
 
 .themeCoverOverlay {
@@ -24,9 +22,20 @@
   right: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
+  z-index: 2;
 }
 
 .MuiTypography-h4 {
+  position: relative;
   color: white;
   padding-top: 150px;
+  z-index: 5;
+}
+
+.article > div {
+  margin-top: 30px;
+}
+
+.barText {
+  height: 400px;
 }
