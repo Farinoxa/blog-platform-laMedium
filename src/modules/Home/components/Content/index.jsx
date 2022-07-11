@@ -16,11 +16,18 @@ import Chips from '../../../shared/Chips';
 import './Content.css';
 
 function Content() {
-  const [value, setValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const [chipsValue, setChipsValue] = useState('');
 
   const filtredArticles = articles.filter((article) => {
-    return article.title.toLowerCase().includes(value.toLowerCase());
+    return article.title.toLowerCase().includes(inputValue.toLowerCase());
   });
+  const filtredArticlesByCategory = filtredArticles.filter((article) => {
+    return article.category.toLowerCase().includes(chipsValue.toLowerCase());
+  });
+  const handleChipsChange = (currentCategory) => {
+    setChipsValue(currentCategory);
+  };
 
   return (
     <div className="contentContainer">
@@ -56,7 +63,7 @@ function Content() {
           md={9}
           className="article"
         >
-          {filtredArticles.map((article) => (
+          {filtredArticlesByCategory.map((article) => (
             <Grid item md={5}>
               <Article key={article.title} article={article} />
             </Grid>
@@ -76,7 +83,7 @@ function Content() {
               fullWidth
               variant="outlined"
               placeholder="Search"
-              onChange={(event) => setValue(event.target.value)}
+              onChange={(event) => setInputValue(event.target.value)}
               InputProps={{
                 endAdornment: (
                   <IconButton>
@@ -93,7 +100,7 @@ function Content() {
             alignItems="center"
             md={12}
           >
-            <Chips />
+            <Chips handleChipsChange={handleChipsChange} />
           </Grid>
         </Grid>
       </Grid>
