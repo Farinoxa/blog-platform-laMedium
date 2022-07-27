@@ -1,0 +1,23 @@
+#topicsTitle {
+  margin-top: 50px;
+}
+
+.MuiButtonBase-root {
+  margin: 5px;
+}
+
+.searchInput > div {
+  margin-top: 30px;
+}
+
+.chipsContainer {
+  margin-top: 20px;
+}
+
+.chip {
+  margin: 5px !important;
+}
+
+.chipSelected {
+  background-color: rgba(181, 45, 45, 0.598) !important;
+}

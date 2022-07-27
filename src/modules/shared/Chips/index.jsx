@@ -1,28 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Chip, Grid } from '@material-ui/core';
+import classNames from 'classnames';
 import articles from '../../Home/constants';
-import './Chips.css';
+import classes from './Chips.module.css';
 
-function Chips({ handleChipsChange }) {
+function Chips({ handleChipsChange, chipsArr }) {
   const chipLabels = [...new Set(articles.map((article) => article.category))];
-
   return (
-    <Grid item md={6} className="chipsContainer">
-      <Chip
-        id="chip"
-        key="All"
-        clickable
-        label="All"
-        onClick={() => handleChipsChange('')}
-      />
+    <Grid item md={6} className={classes.chipsContainer}>
       {chipLabels.map((label) => (
         <Chip
-          id="chip"
           key={label}
+          classes={{
+            root: classNames(classes.chip, {
+              [classes.chipSelected]: chipsArr.includes(label),
+            }),
+          }}
           clickable
           label={label}
-          onClick={() => handleChipsChange(label)}
+          onClick={() => {
+            handleChipsChange(label);
+          }}
         />
       ))}
     </Grid>
@@ -30,7 +29,8 @@ function Chips({ handleChipsChange }) {
 }
 
 Chips.propTypes = {
-  handleChipsChange: PropTypes.string.isRequired,
+  handleChipsChange: PropTypes.func.isRequired,
+  chipsArr: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Chips;

@@ -12,21 +12,33 @@ import { SearchOutlined } from '@material-ui/icons';
 import Article from '../Articles';
 import articles from '../../constants';
 import Chips from '../../../shared/Chips';
+import classes from '../../../shared/Chips/Chips.module.css';
 
 import './Content.css';
 
 function Content() {
   const [inputValue, setInputValue] = useState('');
-  const [chipsValue, setChipsValue] = useState('');
+  const [chipsArr, setChipsArr] = useState([]);
 
-  const filtredArticles = articles.filter((article) => {
-    return article.title.toLowerCase().includes(inputValue.toLowerCase());
-  });
-  const filtredArticlesByCategory = filtredArticles.filter((article) => {
-    return article.category.toLowerCase().includes(chipsValue.toLowerCase());
-  });
+  const filters = [
+    (article) => article.title.toLowerCase().includes(inputValue.toLowerCase()),
+    (article) =>
+      chipsArr.length === 0 ||
+      chipsArr.some((category) =>
+        article.category.toLowerCase().includes(category.toLowerCase()),
+      ),
+  ];
+  const filtredArticles = articles.filter((article) =>
+    filters.every((fn) => fn(article)),
+  );
+
   const handleChipsChange = (currentCategory) => {
-    setChipsValue(currentCategory);
+    setChipsArr(currentCategory);
+    if (chipsArr.includes(currentCategory)) {
+      setChipsArr(chipsArr.filter((chip) => chip !== currentCategory));
+    } else {
+      setChipsArr([...chipsArr, currentCategory]);
+    }
   };
 
   return (
@@ -63,9 +75,9 @@ function Content() {
           md={9}
           className="article"
         >
-          {filtredArticlesByCategory.map((article) => (
-            <Grid item md={5}>
-              <Article key={article.title} article={article} />
+          {filtredArticles.map((article) => (
+            <Grid key={article.title} item md={5}>
+              <Article article={article} />
             </Grid>
           ))}
         </Grid>
@@ -78,9 +90,12 @@ function Content() {
           md={3}
         >
           <Grid item md={11}>
-            <Typography variant="h5"> Related Topics</Typography>
+            <Typography id={classes.topicsTitle} variant="h5">
+              Related Topics
+            </Typography>
             <TextField
               fullWidth
+              className={classes.searchInput}
               variant="outlined"
               placeholder="Search"
               onChange={(event) => setInputValue(event.target.value)}
@@ -100,7 +115,7 @@ function Content() {
             alignItems="center"
             md={12}
           >
-            <Chips handleChipsChange={handleChipsChange} />
+            <Chips handleChipsChange={handleChipsChange} chipsArr={chipsArr} />
           </Grid>
         </Grid>
       </Grid>
