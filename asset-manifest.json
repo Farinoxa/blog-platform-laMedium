@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/blog-platform-la_medium/static/css/main.409d8eb0.css",
-    "main.js": "/blog-platform-la_medium/static/js/main.467383aa.js",
+    "main.js": "/blog-platform-la_medium/static/js/main.611d1dcf.js",
     "static/js/787.e4d3295b.chunk.js": "/blog-platform-la_medium/static/js/787.e4d3295b.chunk.js",
     "static/media/angularNewsPic1.png": "/blog-platform-la_medium/static/media/angularNewsPic1.4b8b6eb670490a0ca45a.png",
     "static/media/reactRacePic.jfif": "/blog-platform-la_medium/static/media/reactRacePic.15c83ba0e490468299ca.jfif",
@@ -11,11 +11,11 @@
     "static/media/logo.svg": "/blog-platform-la_medium/static/media/logo.cb5345207cbef3513ae0c1a7b199dbb3.svg",
     "index.html": "/blog-platform-la_medium/index.html",
     "main.409d8eb0.css.map": "/blog-platform-la_medium/static/css/main.409d8eb0.css.map",
-    "main.467383aa.js.map": "/blog-platform-la_medium/static/js/main.467383aa.js.map",
+    "main.611d1dcf.js.map": "/blog-platform-la_medium/static/js/main.611d1dcf.js.map",
     "787.e4d3295b.chunk.js.map": "/blog-platform-la_medium/static/js/787.e4d3295b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.409d8eb0.css",
-    "static/js/main.467383aa.js"
+    "static/js/main.611d1dcf.js"
   ]
 }
