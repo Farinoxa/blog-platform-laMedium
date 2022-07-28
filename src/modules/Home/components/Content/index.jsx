@@ -17,27 +17,33 @@ import classes from '../../../shared/Chips/Chips.module.css';
 import './Content.css';
 
 function Content() {
-  const [inputValue, setInputValue] = useState('');
-  const [chipsArr, setChipsArr] = useState([]);
+  // const [inputValue, setInputValue] = useState('');
+  const [chipsArr, setChipsArr] = useState({ search: '', filter: [] });
 
   const filters = [
-    (article) => article.title.toLowerCase().includes(inputValue.toLowerCase()),
     (article) =>
-      chipsArr.length === 0 ||
-      chipsArr.some((category) =>
+      article.title.toLowerCase().includes(chipsArr.search.toLowerCase()),
+    (article) =>
+      chipsArr.filter.length === 0 ||
+      chipsArr.filter.some((category) =>
         article.category.toLowerCase().includes(category.toLowerCase()),
       ),
   ];
+  // console.log(chipsArr.search);
+  // console.log(chipsArr.filter);
+
   const filtredArticles = articles.filter((article) =>
     filters.every((fn) => fn(article)),
   );
 
   const handleChipsChange = (currentCategory) => {
-    setChipsArr(currentCategory);
-    if (chipsArr.includes(currentCategory)) {
-      setChipsArr(chipsArr.filter((chip) => chip !== currentCategory));
+    setChipsArr({ filter: currentCategory });
+    if (chipsArr.filter.includes(currentCategory)) {
+      setChipsArr({
+        filter: chipsArr.filter.filter((chip) => chip !== currentCategory),
+      });
     } else {
-      setChipsArr([...chipsArr, currentCategory]);
+      setChipsArr({ filter: [...chipsArr.filter, currentCategory] });
     }
   };
 
@@ -98,7 +104,7 @@ function Content() {
               className={classes.searchInput}
               variant="outlined"
               placeholder="Search"
-              onChange={(event) => setInputValue(event.target.value)}
+              onChange={(event) => setChipsArr({ search: event.target.value })}
               InputProps={{
                 endAdornment: (
                   <IconButton>
@@ -115,7 +121,10 @@ function Content() {
             alignItems="center"
             md={12}
           >
-            <Chips handleChipsChange={handleChipsChange} chipsArr={chipsArr} />
+            <Chips
+              handleChipsChange={handleChipsChange}
+              chipsArr={chipsArr.filter}
+            />
           </Grid>
         </Grid>
       </Grid>
