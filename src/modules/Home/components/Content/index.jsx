@@ -17,7 +17,6 @@ import classes from '../../../shared/Chips/Chips.module.css';
 import './Content.css';
 
 function Content() {
-  // const [inputValue, setInputValue] = useState('');
   const [chipsArr, setChipsArr] = useState({ search: '', filter: [] });
 
   const filters = [
@@ -29,21 +28,23 @@ function Content() {
         article.category.toLowerCase().includes(category.toLowerCase()),
       ),
   ];
-  // console.log(chipsArr.search);
-  // console.log(chipsArr.filter);
 
   const filtredArticles = articles.filter((article) =>
     filters.every((fn) => fn(article)),
   );
 
   const handleChipsChange = (currentCategory) => {
-    setChipsArr({ filter: currentCategory });
+    setChipsArr((filterValue) => ({ ...filterValue, filter: currentCategory }));
     if (chipsArr.filter.includes(currentCategory)) {
-      setChipsArr({
+      setChipsArr((filterValue) => ({
+        ...filterValue,
         filter: chipsArr.filter.filter((chip) => chip !== currentCategory),
-      });
+      }));
     } else {
-      setChipsArr({ filter: [...chipsArr.filter, currentCategory] });
+      setChipsArr((filterValue) => ({
+        ...filterValue,
+        filter: [...chipsArr.filter, currentCategory],
+      }));
     }
   };
 
@@ -104,7 +105,12 @@ function Content() {
               className={classes.searchInput}
               variant="outlined"
               placeholder="Search"
-              onChange={(event) => setChipsArr({ search: event.target.value })}
+              onChange={(event) =>
+                setChipsArr((searchValue) => ({
+                  ...searchValue,
+                  search: event.target.value,
+                }))
+              }
               InputProps={{
                 endAdornment: (
                   <IconButton>
