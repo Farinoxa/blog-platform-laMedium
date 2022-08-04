@@ -5,16 +5,28 @@ import classNames from 'classnames';
 import articles from '../../Home/constants';
 import classes from './Chips.module.css';
 
-function Chips({ handleChipsChange, chipsArr }) {
+function Chips({ handleChipsChange, appliedFilter }) {
   const chipLabels = [...new Set(articles.map((article) => article.category))];
   return (
     <Grid item md={6} className={classes.chipsContainer}>
+      <Chip
+        classes={{
+          root: classNames(classes.chip, {
+            [classes.chipSelected]: appliedFilter.includes(''),
+          }),
+        }}
+        clickable
+        label="All"
+        onClick={() => {
+          handleChipsChange('');
+        }}
+      />
       {chipLabels.map((label) => (
         <Chip
           key={label}
           classes={{
             root: classNames(classes.chip, {
-              [classes.chipSelected]: chipsArr.includes(label),
+              [classes.chipSelected]: appliedFilter.includes(label),
             }),
           }}
           clickable
@@ -30,7 +42,7 @@ function Chips({ handleChipsChange, chipsArr }) {
 
 Chips.propTypes = {
   handleChipsChange: PropTypes.func.isRequired,
-  chipsArr: PropTypes.arrayOf(PropTypes.string).isRequired,
+  appliedFilter: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Chips;

@@ -17,14 +17,17 @@ import classes from '../../../shared/Chips/Chips.module.css';
 import './Content.css';
 
 function Content() {
-  const [chipsArr, setChipsArr] = useState({ search: '', filter: [] });
+  const [appliedFilter, setAppliedFilter] = useState({
+    search: '',
+    categories: [],
+  });
 
   const filters = [
     (article) =>
-      article.title.toLowerCase().includes(chipsArr.search.toLowerCase()),
+      article.title.toLowerCase().includes(appliedFilter.search.toLowerCase()),
     (article) =>
-      chipsArr.filter.length === 0 ||
-      chipsArr.filter.some((category) =>
+      appliedFilter.categories.length === 0 ||
+      appliedFilter.categories.some((category) =>
         article.category.toLowerCase().includes(category.toLowerCase()),
       ),
   ];
@@ -32,18 +35,18 @@ function Content() {
   const filtredArticles = articles.filter((article) =>
     filters.every((fn) => fn(article)),
   );
-
   const handleChipsChange = (currentCategory) => {
-    setChipsArr((filterValue) => ({ ...filterValue, filter: currentCategory }));
-    if (chipsArr.filter.includes(currentCategory)) {
-      setChipsArr((filterValue) => ({
+    if (appliedFilter.categories.includes(currentCategory)) {
+      setAppliedFilter((filterValue) => ({
         ...filterValue,
-        filter: chipsArr.filter.filter((chip) => chip !== currentCategory),
+        categories: appliedFilter.categories.filter(
+          (chip) => chip !== currentCategory,
+        ),
       }));
     } else {
-      setChipsArr((filterValue) => ({
+      setAppliedFilter((filterValue) => ({
         ...filterValue,
-        filter: [...chipsArr.filter, currentCategory],
+        categories: [...appliedFilter.categories, currentCategory],
       }));
     }
   };
@@ -106,7 +109,7 @@ function Content() {
               variant="outlined"
               placeholder="Search"
               onChange={(event) =>
-                setChipsArr((searchValue) => ({
+                setAppliedFilter((searchValue) => ({
                   ...searchValue,
                   search: event.target.value,
                 }))
@@ -129,7 +132,7 @@ function Content() {
           >
             <Chips
               handleChipsChange={handleChipsChange}
-              chipsArr={chipsArr.filter}
+              appliedFilter={appliedFilter.categories}
             />
           </Grid>
         </Grid>
