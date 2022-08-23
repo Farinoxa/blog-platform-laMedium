@@ -44,7 +44,10 @@ export function ArticleContextProvider({ children }) {
 }
 
 ArticleContextProvider.propTypes = {
-  children: PropTypes.objectOf(PropTypes.object()).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export const useArticleContext = () => useContext(ArticleContext);
