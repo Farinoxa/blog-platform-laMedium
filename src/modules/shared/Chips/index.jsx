@@ -1,20 +1,21 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Chip, Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import articles from '../../Home/constants';
+import { useArticleContext } from '../context';
 import classes from './Chips.module.css';
-import dataContext from '../context';
 
 function Chips({ handleChipsChange }) {
-  const context = useContext(dataContext);
+  const { appliedFilter } = useArticleContext();
+
   const chipLabels = [...new Set(articles.map((article) => article.category))];
   return (
     <Grid item md={6} className={classes.chipsContainer}>
       <Chip
         classes={{
           root: classNames(classes.chip, {
-            [classes.chipSelected]: context.categories.includes(''),
+            [classes.chipSelected]: appliedFilter.categories.includes(''),
           }),
         }}
         clickable
@@ -28,7 +29,7 @@ function Chips({ handleChipsChange }) {
           key={label}
           classes={{
             root: classNames(classes.chip, {
-              [classes.chipSelected]: context.categories.includes(label),
+              [classes.chipSelected]: appliedFilter.categories.includes(label),
             }),
           }}
           clickable

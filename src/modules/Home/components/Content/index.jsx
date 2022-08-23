@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Container,
   Grid,
@@ -10,33 +10,15 @@ import {
 } from '@material-ui/core/';
 import { SearchOutlined } from '@material-ui/icons';
 import Article from '../Articles';
-import articles from '../../constants';
 import Chips from '../../../shared/Chips';
 import classes from '../../../shared/Chips/Chips.module.css';
-import dataContext from '../../../shared/context';
+import { useArticleContext } from '../../../shared/context';
+
 import './Content.css';
 
-const { Provider } = dataContext;
-
 function Content() {
-  const [appliedFilter, setAppliedFilter] = useState({
-    search: '',
-    categories: [],
-  });
-
-  const filters = [
-    (article) =>
-      article.title.toLowerCase().includes(appliedFilter.search.toLowerCase()),
-    (article) =>
-      appliedFilter.categories.length === 0 ||
-      appliedFilter.categories.some((category) =>
-        article.category.toLowerCase().includes(category.toLowerCase()),
-      ),
-  ];
-
-  const filtredArticles = articles.filter((article) =>
-    filters.every((fn) => fn(article)),
-  );
+  const { appliedFilter, setAppliedFilter, filtredArticles } =
+    useArticleContext();
   const handleChipsChange = (currentCategory) => {
     if (appliedFilter.categories.includes(currentCategory)) {
       setAppliedFilter((filterValue) => ({
@@ -54,93 +36,91 @@ function Content() {
   };
 
   return (
-    <Provider value={appliedFilter}>
-      <div className="contentContainer">
-        <div className="themeCover">
-          <Paper
-            elevation={0}
-            variant="outlined"
-            className="themeCoverPaper"
-            style={{
-              backgroundImage: `url(https://source.unsplash.com/random)`,
-            }}
-          >
-            <Container>
-              <div className="themeCoverOverlay" />
-              <Typography variant="h4">
-                What Matters to You Matters to Us
-              </Typography>
-            </Container>
-          </Paper>
-        </div>
+    <div className="contentContainer">
+      <div className="themeCover">
+        <Paper
+          elevation={0}
+          variant="outlined"
+          className="themeCoverPaper"
+          style={{
+            backgroundImage: `url(https://source.unsplash.com/random)`,
+          }}
+        >
+          <Container>
+            <div className="themeCoverOverlay" />
+            <Typography variant="h4">
+              What Matters to You Matters to Us
+            </Typography>
+          </Container>
+        </Paper>
+      </div>
 
+      <Grid
+        className="mainContent"
+        container
+        spacing={1}
+        justifyContent="space-around"
+        alignContent="center"
+        md={12}
+      >
         <Grid
-          className="mainContent"
           container
           spacing={1}
           justifyContent="space-around"
           alignContent="center"
-          md={12}
+          md={9}
+          className="article"
         >
+          {filtredArticles.map((article) => (
+            <Grid key={article.title} item md={5}>
+              <Article article={article} />
+            </Grid>
+          ))}
+        </Grid>
+        <Divider orientation="vertical" flexItem />
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="flex-start"
+          className="barText"
+          md={3}
+        >
+          <Grid item md={11}>
+            <Typography id={classes.topicsTitle} variant="h5">
+              Related Topics
+            </Typography>
+            <TextField
+              fullWidth
+              className={classes.searchInput}
+              variant="outlined"
+              placeholder="Search"
+              onChange={(event) =>
+                setAppliedFilter((searchValue) => ({
+                  ...searchValue,
+                  search: event.target.value,
+                }))
+              }
+              InputProps={{
+                endAdornment: (
+                  <IconButton>
+                    <SearchOutlined />
+                  </IconButton>
+                ),
+              }}
+            />
+          </Grid>
           <Grid
             container
             spacing={1}
             justifyContent="space-around"
-            alignContent="center"
-            md={9}
-            className="article"
+            alignItems="center"
+            md={12}
           >
-            {filtredArticles.map((article) => (
-              <Grid key={article.title} item md={5}>
-                <Article article={article} />
-              </Grid>
-            ))}
-          </Grid>
-          <Divider orientation="vertical" flexItem />
-          <Grid
-            container
-            justifyContent="center"
-            alignItems="flex-start"
-            className="barText"
-            md={3}
-          >
-            <Grid item md={11}>
-              <Typography id={classes.topicsTitle} variant="h5">
-                Related Topics
-              </Typography>
-              <TextField
-                fullWidth
-                className={classes.searchInput}
-                variant="outlined"
-                placeholder="Search"
-                onChange={(event) =>
-                  setAppliedFilter((searchValue) => ({
-                    ...searchValue,
-                    search: event.target.value,
-                  }))
-                }
-                InputProps={{
-                  endAdornment: (
-                    <IconButton>
-                      <SearchOutlined />
-                    </IconButton>
-                  ),
-                }}
-              />
-            </Grid>
-            <Grid
-              container
-              spacing={1}
-              justifyContent="space-around"
-              alignItems="center"
-              md={12}
-            >
-              <Chips handleChipsChange={handleChipsChange} />
-            </Grid>
+            <Chips handleChipsChange={handleChipsChange} />
           </Grid>
         </Grid>
-      </div>
-    </Provider>
+      </Grid>
+    </div>
   );
 }
 
