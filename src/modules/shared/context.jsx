@@ -1,6 +1,6 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import articles from '../Home/constants';
+import getArticles from '../../api';
 
 const ArticleContext = createContext({
   appliedFilter: {
@@ -15,6 +15,8 @@ export function ArticleContextProvider({ children }) {
     categories: [],
   });
 
+  const [articles, setArticles] = useState([]);
+
   const filters = [
     (article) =>
       article.title.toLowerCase().includes(appliedFilter.search.toLowerCase()),
@@ -28,6 +30,17 @@ export function ArticleContextProvider({ children }) {
   const filtredArticles = articles.filter((article) =>
     filters.every((fn) => fn(article)),
   );
+
+  useEffect(() => {
+    getArticles()
+      .then((value) => {
+        setArticles(value);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    console.log('effect');
+  }, [appliedFilter]);
 
   const value = React.useMemo(
     () => ({
